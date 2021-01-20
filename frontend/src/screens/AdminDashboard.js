@@ -9,7 +9,7 @@ export default function AdminDashboardScreen() {
     const {loading, error, orders} = ordersList;
     const dispatch = useDispatch();
 
-    function getSales(orders) {
+    function getSales(orders) { // TODO: find bug with orders being calculated
         var sales;
         orders.map((order) => (
             sales += order.totalPrice
