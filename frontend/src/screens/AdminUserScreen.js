@@ -36,7 +36,6 @@ export default function AdminUserScreen(props) {
 
     const editUserDetailsHandler = (userId) => {
         //TODO: dispatch edit details, redirect to user page
-        props.history.push('/profile');
     }
 
     useEffect(() => {
