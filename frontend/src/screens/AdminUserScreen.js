@@ -34,6 +34,11 @@ export default function AdminUserScreen(props) {
         dispatch(createRandomUser());
     }
 
+    const editUserDetailsHandler = (userId) => {
+        //TODO: dispatch edit details, redirect to user page
+        props.history.push('/profile');
+    }
+
     useEffect(() => {
         dispatch(listUsers());
         if (deleteSuccess) {
@@ -81,7 +86,7 @@ export default function AdminUserScreen(props) {
                                         <td> TODO: SUM USER'S TRANSACTION PRICES</td>
                                         <td>
                                             <button type="button" className="small" onClick={() => deleteUserHandler(user)}> Delete User </button>
-                                            <button type="button" className="small"> TODO: Edit User Details </button>
+                                            <button type="button" className="small" onClick={() => editUserDetailsHandler(user._id)}> TODO: Edit User Details </button>
                                         </td>
                                     </tr>
                                 ))}
