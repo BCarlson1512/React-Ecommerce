@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listOrders } from '../actions/orderActions';
 import AdminDashboardMenu from '../components/AdminDashboardMenu';
 
 export default function AdminDashboardScreen() {
     
+    const ordersList = useSelector(state => state.ordersList);
+    const {loading, error, orders} = ordersList;
+    const dispatch = useDispatch();
+
+    function getSales(orders) {
+        var sales;
+        orders.map((order) => (
+            sales += order.totalPrice
+        ));
+        return sales; 
+    }
+
+    useEffect(() => {
+        dispatch(listOrders());
+    }, [dispatch])
     return (
         <div className="admin">
             <div className="admin-sidebar">
