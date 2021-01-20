@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAdminUser, deleteUser, listUsers } from '../actions/userActions';
+import { createAdminUser, createRandomUser, deleteUser, listUsers } from '../actions/userActions';
 import AdminDashboardMenu from '../components/AdminDashboardMenu';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -31,6 +31,7 @@ export default function AdminUserScreen(props) {
 
     const createUserHandler = () => {
         //TODO: dispatch create user
+        dispatch(createRandomUser());
     }
 
     useEffect(() => {

@@ -139,3 +139,22 @@ export const createAdminUser = () => async(dispatch) => {
         });
     }
 }
+
+export const createRandomUser = () => async(dispatch) => {
+    dispatch({type: USER_REGISTER_REQUEST});
+    const randomNum = Math.floor(Math.random() * 100) +1;
+    const name = `customer${randomNum}`;
+    const email = `sample${randomNum}@customer.com`;
+    const password = '5678';
+    const isAdmin = false;
+    try {
+        const {data} = await Axios.post('/api/users/registerrandom', {name, email, password, isAdmin});
+        dispatch({type: USER_REGISTER_SUCCESS , payload: data});
+    } catch (error) {
+        dispatch({type: USER_REGISTER_FAIL, payload: 
+            error.response && error.response.data.message 
+            ?error.response.data.message 
+            : error.message,
+        });
+    }
+}
