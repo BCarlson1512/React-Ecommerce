@@ -121,12 +121,16 @@ export const deleteUser = (user) => async(dispatch) => {
     }
 }
 
-export const createAdminUser = (name, email, password, isAdmin) => async(dispatch) => {
-    dispatch({type: USER_REGISTER_REQUEST, payload: {email, password}});
+export const createAdminUser = () => async(dispatch) => {
+    dispatch({type: USER_REGISTER_REQUEST});
+    const randomNum = Math.floor(Math.random() * 100) +1;
+    const name = `Admin${randomNum}`;
+    const email = `sample${randomNum}@admin.com`;
+    const password = '5678';
+    const isAdmin = true;
     try {
-        const {data} = await Axios.post('/api/users/register', {name, email, password, isAdmin});
+        const {data} = await Axios.post('/api/users/registeradmin', {name, email, password, isAdmin});
         dispatch({type: USER_REGISTER_SUCCESS , payload: data});
-        localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
         dispatch({type: USER_REGISTER_FAIL, payload: 
             error.response && error.response.data.message 

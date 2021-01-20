@@ -93,4 +93,23 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async(req, res) => {
     }
 }));
 
+userRouter.post('/registeradmin', expressAsyncHandler(async(req, res)=>{
+    const admin = new User({
+        name: req.body.name, 
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8),
+        isAdmin: true,
+    });
+    const createdAdmin = await admin.save();
+    res.send({
+        _id: createdAdmin._id,
+        name: createdAdmin.name,
+        email: createdAdmin.email,
+        isAdmin: createdAdmin.isAdmin,
+        token: generateToken(createdAdmin),
+    });
+})
+);
+
+
 export default userRouter;

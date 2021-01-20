@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteUser, listUsers } from '../actions/userActions';
+import { createAdminUser, deleteUser, listUsers } from '../actions/userActions';
 import AdminDashboardMenu from '../components/AdminDashboardMenu';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -13,6 +13,9 @@ export default function AdminUserScreen(props) {
     const userDelete = useSelector(state => state.userDelete);
     const {loading: deleteLoad, error: deleteError, success: deleteSuccess} = userDelete;
     
+    const userRegister = useSelector(state => state.userRegister);
+    const {success: createSuccess} = userRegister;
+
     const dispatch = useDispatch();
 
     const deleteUserHandler = (user) => {
@@ -23,6 +26,7 @@ export default function AdminUserScreen(props) {
 
     const createAdminHandler = () => {
         //TODO: dispatch create admin
+        dispatch(createAdminUser());
     }
 
     const createUserHandler = () => {
@@ -34,7 +38,7 @@ export default function AdminUserScreen(props) {
         if (deleteSuccess) {
             dispatch({type: USER_DELETE_RESET});
         }
-    }, [dispatch, deleteSuccess])
+    }, [dispatch, deleteSuccess, createSuccess])
     return (
         <div className="admin">
             <div className="admin-sidebar">
